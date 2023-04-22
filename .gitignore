@@ -21,3 +21,9 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+.idea/.gitignore
+.idea/misc.xml
+.idea/modules.xml
+.idea/san-qi-shi-xing.iml
+.idea/vcs.xml
+Project_Default.xml
