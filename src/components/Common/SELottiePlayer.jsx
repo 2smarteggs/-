@@ -24,7 +24,7 @@ const SELottiePlayer = forwardRef((props, ref) => {
      * Play animation to a certain progress
      * @param toProgress a numeric value between 0 and 1
      */
-    const play = (toProgress) => {
+    const _play = (toProgress) => {
         toProgress = toProgress >= 1 ? 1 : toProgress < 0 ? 0 : toProgress
         setTargetProgress(toProgress)
         if (currentProgress <= toProgress) {
@@ -32,17 +32,17 @@ const SELottiePlayer = forwardRef((props, ref) => {
         }
     }
 
-    const reset = () => {
+    const _reset = () => {
         playerRef.current.stop();
     }
 
     useImperativeHandle(ref, () => ({
         play(toProgress) {
-            play(toProgress);
+            _play(toProgress);
         },
 
         reset() {
-            reset();
+            _reset();
         }
     }));
 
