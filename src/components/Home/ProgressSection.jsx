@@ -4,22 +4,23 @@ import SEMuiFloatingActionButton from "../Common/SEMuiFloatingActionButton";
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import progressBar from "../../animations/progressBar.json";
+import ProgressBar from "./ProgressBar";
 
 const ProgressSection = () => {
 
-    const playerRefCarbon = useRef();
-    const playerRefProtein = useRef();
+    const progressRefCarbon = useRef();
+    const progressRefProtein = useRef();
 
     const fabRef = useRef();
 
     const handleClick = (e) => {
-        playerRefCarbon.current.play(0.75);
-        playerRefProtein.current.play(0.85);
+        progressRefCarbon.current.play(50);
+        progressRefProtein.current.play(85);
     }
 
     const handleClickB = (e) => {
-        playerRefCarbon.current.reset();
-        playerRefProtein.current.reset();
+        progressRefCarbon.current.reset();
+        progressRefProtein.current.reset();
     }
 
     const handleClickC = (e) => {
@@ -37,21 +38,13 @@ const ProgressSection = () => {
                     碳水化合物
                 </Grid>
                 <Grid item xs={8}>
-                    <SELottiePlayer
-                        ref={playerRefCarbon}
-                        src={progressBar}
-                        style={{ height: '100%', width: '100%' }}
-                    />
+                    <ProgressBar ref={progressRefCarbon} />
                 </Grid>
                 <Grid item xs={4}>
                     蛋白质
                 </Grid>
                 <Grid item xs={8}>
-                    <SELottiePlayer
-                        ref={playerRefProtein}
-                        src={progressBar}
-                        style={{ height: '100%', width: '100%' }}
-                    />
+                    <ProgressBar ref={progressRefProtein} />
                 </Grid>
             </Grid>
         </Container>
