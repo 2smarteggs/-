@@ -5,12 +5,14 @@ import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import progressBar from "../../animations/progressBar.json";
 import ProgressBar from "./ProgressBar";
+import {useUser} from "../../contexts/UserContext";
+import {Timer} from "@mui/icons-material";
 
 const ProgressSection = () => {
+    const { user, updateUser } = useUser();
 
     const progressRefCarbon = useRef();
     const progressRefProtein = useRef();
-
     const fabRef = useRef();
 
     const handleClick = (e) => {
@@ -25,6 +27,9 @@ const ProgressSection = () => {
 
     const handleClickC = (e) => {
         fabRef.current.tic();
+        updateUser({
+            name: "aaa",
+        });
     }
 
     return(<>
