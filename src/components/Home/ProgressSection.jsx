@@ -1,12 +1,9 @@
 import React, {  useRef } from 'react';
-import SELottiePlayer from "../Common/SELottiePlayer";
 import SEMuiFloatingActionButton from "../Common/SEMuiFloatingActionButton";
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
-import progressBar from "../../animations/progressBar.json";
 import ProgressBar from "./ProgressBar";
 import {useUser} from "../../contexts/UserContext";
-import {Timer} from "@mui/icons-material";
 
 const ProgressSection = () => {
     const { user, updateUser } = useUser();
