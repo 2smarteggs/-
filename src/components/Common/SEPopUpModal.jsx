@@ -1,8 +1,8 @@
 import React, {useState, useEffect, forwardRef, useImperativeHandle} from 'react';
 import PropTypes from 'prop-types';
-import './css/PopUpModal.css';
+import './SEPopUpModal.css';
 
-const PopUpModal = forwardRef(({ mode, title, content, children, show, onClose }, ref) => {
+const SEPopUpModal = forwardRef(({ mode, title, content, children, actionButton, show, onClose }, ref) => {
     const [visible, setVisible] = useState(false);
     const [disappear, setDisappear] = useState(false);
 
@@ -41,31 +41,40 @@ const PopUpModal = forwardRef(({ mode, title, content, children, show, onClose }
 
     return (
         <div className={`popup-modal ${mode} ${visible ? 'visible' : ''} ${disappear ? 'disappear' : ''}`} onClick={handleClickOutside}>
-            <div className="popup-modal-content">
-                {mode === 'notification' && (
-                    <>
-                        <div className="popup-modal__header">
-                            <h2 className="popup-modal-title">{title}</h2>
-                        </div>
-                        <div className="popup-modal__content">
-                            <p className="popup-modal-description">{content}</p>
-                        </div>
-                        <div className="popup-modal__footer">
-                            <button className="popup-modal-button" onClick={handleClose}>确认</button>
-                        </div>
-                    </>
-                )}
-                {mode === 'dialog' && (
-                    <>
+            {mode === 'notification' && (
+                <>
+                    <div className="popup-modal__header">
+                        <h2 className="popup-modal-title">{title}</h2>
+                    </div>
+                    <div className="popup-modal__content">
+                        <p className="popup-modal-description">{content}</p>
+                    </div>
+                    <div className="popup-modal__footer">
+                        <button className="popup-modal-button" onClick={handleClose}>确认</button>
+                    </div>
+                </>
+            )}
+            {mode === 'dialog' && (
+                <>
+                    <div style={{height: '90%', overflowY: 'auto'}}>
                         {children}
-                    </>
-                )}
-            </div>
+                    </div>
+                    <div style={{
+                        bottom: 0,
+                        position: 'absolute',
+                        left: '50%',
+                        transform: 'translateX(-50%)',
+                        width: '98%',
+                    }}>
+                        {actionButton}
+                    </div>
+                </>
+            )}
         </div>
     );
 });
 
-PopUpModal.propTypes = {
+SEPopUpModal.propTypes = {
     mode: PropTypes.oneOf(['notification', 'dialog']).isRequired,
     title: PropTypes.string,
     content: PropTypes.string,
@@ -74,10 +83,10 @@ PopUpModal.propTypes = {
     onClose: PropTypes.func.isRequired,
 };
 
-PopUpModal.defaultProps = {
+SEPopUpModal.defaultProps = {
     title: 'Title',
     content: 'Description',
     children: null,
 };
 
-export default PopUpModal;
+export default SEPopUpModal;

@@ -4,8 +4,10 @@ import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import ProgressBar from "./ProgressBar";
 import {useUser} from "../../contexts/UserContext";
-import PopUpModal from "./PopUpModal";
+import SEPopUpModal from "../Common/SEPopUpModal";
 import { useOnClickOutside } from 'usehooks-ts'
+import AddHistoryFood from "./AddHistoryFood";
+import {Button} from "@mui/material";
 
 const ProgressSection = () => {
     const { user, updateUser } = useUser();
@@ -72,9 +74,11 @@ const ProgressSection = () => {
             ref={fabRef}
         />
         <div ref={onClickOutsideRef}>
-            <PopUpModal mode="notification" show={modalVisible} onClose={handleCloseModal} ref={modalRef}>
-                <h1>AAA</h1>
-            </PopUpModal>
+            <SEPopUpModal mode="dialog" show={modalVisible} onClose={handleCloseModal} ref={modalRef} actionButton={
+                <Button variant="contained" fullWidth>添加新食物</Button>
+            }>
+                <AddHistoryFood />
+            </SEPopUpModal>
         </div>
     </>)
 };

@@ -3,7 +3,7 @@ import Box from '@mui/material/Box';
 import LinearProgress from '@mui/material/LinearProgress';
 import Typography from '@mui/material/Typography';
 
-const progressBar = forwardRef((props, ref) => {
+const ProgressBar = forwardRef((props, ref) => {
 
     const [progress, setProgress] = useState(0);
 
@@ -43,4 +43,4 @@ const progressBar = forwardRef((props, ref) => {
     </>)
 })
 
-export default progressBar;
+export default ProgressBar;
