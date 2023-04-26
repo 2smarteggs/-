@@ -1,0 +1,91 @@
+.popup-modal {
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    height: auto;
+    z-index: 1000;
+    display: block;
+    text-align: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 10px 10px 0 0;
+}
+
+.popup-modal.visible {
+    opacity: 1;
+    pointer-events: auto;
+    animation: pop-up 0.3s ease-in-out forwards;
+}
+
+.popup-modal.disappear {
+    animation: pop-down 0.3s ease-in-out forwards;
+}
+
+.popup-modal.notification {
+    height: 33%;
+}
+
+.popup-modal.dialog {
+    height: 50%;
+}
+
+/* 在屏幕宽度大于等于600px时，将弹窗宽度设置为屏幕宽度的三分之一 */
+@media screen and (min-width: 600px) {
+    .popup-modal {
+        width: 33.33%;
+    }
+}
+
+.popup-modal__header {
+    padding: 5px;
+    text-align: center;
+    position: relative;
+    top: 5px;
+    left: 0;
+    right: 0;
+}
+
+.popup-modal__footer {
+    padding: 5px;
+    text-align: center;
+    position: absolute;
+    bottom: 5px;
+    left: 0;
+    right: 0;
+}
+
+.popup-modal__button {
+    padding: 8px 16px;
+    border: none;
+    background-color: #f44336;
+    color: #fff;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+@keyframes pop-up {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, 100%);
+    }
+    100% {
+        opacity: 1;
+        transform: translate(-50%, 0%);
+    }
+}
+
+@keyframes pop-down {
+    0% {
+        opacity: 1;
+        transform: translate(-50%, 0%);
+    }
+    100% {
+        opacity: 0;
+        transform: translate(-50%, 100%);
+    }
+}

@@ -2,7 +2,7 @@ import { forwardRef, useImperativeHandle, useState } from "react";
 import { useTheme } from '@mui/material/styles';
 import Zoom from '@mui/material/Zoom';
 import Fab from '@mui/material/Fab';
-import PersonIcon from '@mui/icons-material/Person';
+import AddIcon from '@mui/icons-material/Add';
 import CheckIcon from '@mui/icons-material/Check';
 import { green } from '@mui/material/colors';
 
@@ -35,7 +35,7 @@ const SEMuiFloatingActionButton = forwardRef((props, ref) => {
         {
             color: 'primary',
             sx: fabStyle,
-            icon: <PersonIcon />,
+            icon: <AddIcon />,
             label: 'Add',
         },
         {

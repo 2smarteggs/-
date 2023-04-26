@@ -1,9 +1,10 @@
-import React, {  useRef } from 'react';
+import React, {useRef, useState} from 'react';
 import SEMuiFloatingActionButton from "../Common/SEMuiFloatingActionButton";
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import ProgressBar from "./ProgressBar";
 import {useUser} from "../../contexts/UserContext";
+import PopUpModal from "./PopUpModal";
 
 const ProgressSection = () => {
     const { user, updateUser } = useUser();
@@ -11,6 +12,16 @@ const ProgressSection = () => {
     const progressRefCarbon = useRef();
     const progressRefProtein = useRef();
     const fabRef = useRef();
+
+    const [modalVisible, setModalVisible] = useState(false);
+    const handleOpenModal = () => {
+        setModalVisible(true);
+    };
+
+    const handleCloseModal = () => {
+        setModalVisible(false);
+    };
+
 
     const handleClick = (e) => {
         progressRefCarbon.current.play(50);
@@ -27,6 +38,7 @@ const ProgressSection = () => {
         updateUser({
             name: "aaa",
         });
+        handleOpenModal();
     }
 
     return(<>
@@ -53,6 +65,7 @@ const ProgressSection = () => {
         <SEMuiFloatingActionButton
             ref={fabRef}
         />
+        <PopUpModal mode="notification" title="提示" content="这是一个通知弹窗" show={modalVisible} onClose={handleCloseModal} />
     </>)
 };
 
