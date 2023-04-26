@@ -5,6 +5,7 @@ import Grid from '@mui/material/Grid';
 import ProgressBar from "./ProgressBar";
 import {useUser} from "../../contexts/UserContext";
 import PopUpModal from "./PopUpModal";
+import { useOnClickOutside } from 'usehooks-ts'
 
 const ProgressSection = () => {
     const { user, updateUser } = useUser();
@@ -12,8 +13,11 @@ const ProgressSection = () => {
     const progressRefCarbon = useRef();
     const progressRefProtein = useRef();
     const fabRef = useRef();
+    const modalRef = useRef();
+    const onClickOutsideRef = useRef(null);
 
     const [modalVisible, setModalVisible] = useState(false);
+
     const handleOpenModal = () => {
         setModalVisible(true);
     };
@@ -41,6 +45,8 @@ const ProgressSection = () => {
         handleOpenModal();
     }
 
+    useOnClickOutside(onClickOutsideRef, handleCloseModal);
+
     return(<>
         <button onClick={handleClick}>aaa</button>
         <button onClick={handleClickB}>bbb</button>
@@ -65,7 +71,11 @@ const ProgressSection = () => {
         <SEMuiFloatingActionButton
             ref={fabRef}
         />
-        <PopUpModal mode="notification" title="提示" content="这是一个通知弹窗" show={modalVisible} onClose={handleCloseModal} />
+        <div ref={onClickOutsideRef}>
+            <PopUpModal mode="notification" show={modalVisible} onClose={handleCloseModal} ref={modalRef}>
+                <h1>AAA</h1>
+            </PopUpModal>
+        </div>
     </>)
 };
 

@@ -1,14 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, {useState, useEffect, forwardRef, useImperativeHandle} from 'react';
 import PropTypes from 'prop-types';
 import './css/PopUpModal.css';
 
-const PopUpModal = ({ mode, title, content, children, show, onClose }) => {
+const PopUpModal = forwardRef(({ mode, title, content, children, show, onClose }, ref) => {
     const [visible, setVisible] = useState(false);
     const [disappear, setDisappear] = useState(false);
 
-    useEffect(() => {
+    const handleOpen = () => {
         setVisible(show);
-    }, [show]);
+    }
 
     const handleClose = () => {
         setDisappear(true);
@@ -25,6 +25,20 @@ const PopUpModal = ({ mode, title, content, children, show, onClose }) => {
         }
     };
 
+    useImperativeHandle(ref, () => ({
+        close() {
+            handleClose()
+        }
+    }));
+
+    useEffect(() => {
+        if (show) {
+            handleOpen();
+        } else {
+            if (visible) handleClose();
+        }
+    }, [handleClose, handleOpen, show, visible]);
+
     return (
         <div className={`popup-modal ${mode} ${visible ? 'visible' : ''} ${disappear ? 'disappear' : ''}`} onClick={handleClickOutside}>
             <div className="popup-modal-content">
@@ -33,7 +47,9 @@ const PopUpModal = ({ mode, title, content, children, show, onClose }) => {
                         <div className="popup-modal__header">
                             <h2 className="popup-modal-title">{title}</h2>
                         </div>
-                        <p className="popup-modal-description">{content}</p>
+                        <div className="popup-modal__content">
+                            <p className="popup-modal-description">{content}</p>
+                        </div>
                         <div className="popup-modal__footer">
                             <button className="popup-modal-button" onClick={handleClose}>确认</button>
                         </div>
@@ -47,7 +63,7 @@ const PopUpModal = ({ mode, title, content, children, show, onClose }) => {
             </div>
         </div>
     );
-};
+});
 
 PopUpModal.propTypes = {
     mode: PropTypes.oneOf(['notification', 'dialog']).isRequired,
@@ -59,8 +75,8 @@ PopUpModal.propTypes = {
 };
 
 PopUpModal.defaultProps = {
-    title: '',
-    content: '',
+    title: 'Title',
+    content: 'Description',
     children: null,
 };
 
