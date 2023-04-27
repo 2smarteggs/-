@@ -4,10 +4,9 @@ import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import ProgressBar from "./ProgressBar";
 import {useUser} from "../../contexts/UserContext";
-import SEPopUpModal from "../Common/SEPopUpModal";
-import { useOnClickOutside } from 'usehooks-ts'
 import AddHistoryFood from "./AddHistoryFood";
 import {Button} from "@mui/material";
+import SEModal from "../Common/SEModal";
 
 const ProgressSection = () => {
     const { user, updateUser } = useUser();
@@ -15,8 +14,6 @@ const ProgressSection = () => {
     const progressRefCarbon = useRef();
     const progressRefProtein = useRef();
     const fabRef = useRef();
-    const modalRef = useRef();
-    const onClickOutsideRef = useRef(null);
 
     const [modalVisible, setModalVisible] = useState(false);
 
@@ -47,8 +44,6 @@ const ProgressSection = () => {
         handleOpenModal();
     }
 
-    useOnClickOutside(onClickOutsideRef, handleCloseModal);
-
     return(<>
         <button onClick={handleClick}>aaa</button>
         <button onClick={handleClickB}>bbb</button>
@@ -73,13 +68,11 @@ const ProgressSection = () => {
         <SEMuiFloatingActionButton
             ref={fabRef}
         />
-        <div ref={onClickOutsideRef}>
-            <SEPopUpModal mode="dialog" show={modalVisible} onClose={handleCloseModal} ref={modalRef} actionButton={
-                <Button variant="contained" fullWidth>添加新食物</Button>
-            }>
-                <AddHistoryFood />
-            </SEPopUpModal>
-        </div>
+        <SEModal mode="dialog" show={modalVisible} onClose={handleCloseModal} actionButton={
+            <Button variant="contained" fullWidth>添加新食物</Button>
+        }>
+            <AddHistoryFood />
+        </SEModal>
     </>)
 };
 
