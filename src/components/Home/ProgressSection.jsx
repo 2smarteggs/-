@@ -7,6 +7,7 @@ import {useUser} from "../../contexts/UserContext";
 import AddHistoryFood from "./AddHistoryFood";
 import {Button} from "@mui/material";
 import SEModal from "../Common/SEModal";
+import AddNewFood from "./AddNewFood";
 
 const ProgressSection = () => {
     const { user, updateUser } = useUser();
@@ -16,6 +17,7 @@ const ProgressSection = () => {
     const fabRef = useRef();
 
     const [modalVisible, setModalVisible] = useState(false);
+    const [showNewFoodModal, setShowNewFoodModal] = useState(false);
 
     const handleOpenModal = () => {
         setModalVisible(true);
@@ -23,6 +25,10 @@ const ProgressSection = () => {
 
     const handleCloseModal = () => {
         setModalVisible(false);
+    };
+
+    const handleCloseAddFoodModal = () => {
+        setShowNewFoodModal(false);
     };
 
 
@@ -69,9 +75,14 @@ const ProgressSection = () => {
             ref={fabRef}
         />
         <SEModal mode="dialog" show={modalVisible} onClose={handleCloseModal} actionButton={
-            <Button variant="contained" fullWidth>添加新食物</Button>
+            <Button variant="contained" onClick={(e) => {setShowNewFoodModal(true)}} fullWidth>添加新食物</Button>
         }>
             <AddHistoryFood />
+        </SEModal>
+        <SEModal mode="dialog" show={showNewFoodModal} onClose={handleCloseAddFoodModal} actionButton={
+            <Button variant="contained" fullWidth>添加</Button>
+        }>
+            <AddNewFood />
         </SEModal>
     </>)
 };
