@@ -20,7 +20,6 @@ const SEModal = ({ mode, title, content, children, actionButton, show, onClose})
     };
 
     const handleClickOutside = (e) => {
-        console.log(e.target.classList)
         if (e.target.classList.contains('popup-modal__background')) {
             handleClose();
         }
